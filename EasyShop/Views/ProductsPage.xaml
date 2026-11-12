@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:EasyShop.Models"
+             x:Class="EasyShop.Views.ProductsPage"
+             Title="Produtos (NoSQL)">
+    <Grid RowDefinitions="Auto,*" Padding="16" RowSpacing="12">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="8">
+            <Entry Placeholder="Nome do produto" Text="{Binding Name}" />
+            <Entry Placeholder="Preço (ex: 99,90)" Keyboard="Numeric" Text="{Binding PriceText}" />
+            <Entry Placeholder="Atributos (ex: cor=Azul; tamanho=M)" Text="{Binding AttributesText}" />
+            <Button Text="Salvar Produto" Command="{Binding SaveCommand}" />
+            <Label Text="{Binding Message}" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Product">
+                    <Border Padding="10" Margin="0,4" StrokeThickness="1">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Text="{Binding Price, StringFormat='R$ {0:N2}'}" />
+                            <Label Text="{Binding AttributesText}" FontSize="12" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
